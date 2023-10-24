@@ -1,3 +1,20 @@
+import mysql from "mysql2";
+import {
+    MYSQL_HOST,
+    MYSQL_USER,
+    MYSQL_PASSWORD,
+    MYSQL_DATABASE,
+    MYSQL_PORT
+} from './config.js';
+
+const pool = mysql.createPool({
+    host: MYSQL_HOST,
+    user: MYSQL_USER,
+    password: MYSQL_PASSWORD,
+    database: MYSQL_DATABASE,
+    port: MYSQL_PORT
+}).promise();
+
 export async function getAlumnoById(id){
     const [row] = await pool.query('SELECT * FROM alumnos WHERE id_alumno = ?', [id]);
     return row;
